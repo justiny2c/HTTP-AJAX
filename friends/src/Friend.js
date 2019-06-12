@@ -8,8 +8,7 @@ class Friend extends React.Component {
     render(){
         return (
             <div>
-                {this.props.friend.data}
-
+                {this.props.friend.name}
             </div>
         )
 
