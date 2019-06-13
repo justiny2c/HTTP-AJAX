@@ -64,6 +64,7 @@ class Friends extends React.Component {
             friends: response.data
 
         }))
+        
     }    
 
     updateHandler = (e, id) => {
