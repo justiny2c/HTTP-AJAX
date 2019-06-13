@@ -6,12 +6,6 @@ class Friend extends React.Component {
 
     }
 
-    deleteHandler = e => {
-
-        axios.delete(`http://localhost:5000/friends/${this.props.friend.id}`)
-        .then()
-    }
-
 
     render(){
         return (
@@ -22,12 +16,12 @@ class Friend extends React.Component {
                     <p>email: {this.props.friend.email}</p>
                     <button
                         key = {this.props.friend.id}
-                        onClick = {() => this.props.updateHandler(this.props.friend.id)}>
+                        onClick = {(e) => this.props.updateHandler(e, this.props.friend.id)}>
                         Update
                     </button>
                     <button
                         key = {this.props.friend.id}
-                        onClick = {this.deleteHandler}>
+                        onClick = {(e) => this.props.deleteHandler(e, this.props.friend.id)}>
                         X
                     </button>
                     

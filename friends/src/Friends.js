@@ -29,7 +29,7 @@ class Friends extends React.Component {
     }
 
     submitHandler = e => {
-        // e.preventDefault();
+        e.preventDefault();
         
         let data = {
                 name: this.state.name,
@@ -40,7 +40,10 @@ class Friends extends React.Component {
         let url = "http://localhost:5000/friends";
 
         axios.post(url, data)
-            .then(response => console.log(response))
+            .then(response => this.setState({
+                friends: response.data
+
+            }))
             .catch(err => console.log(err))
 
         this.setState({
@@ -51,7 +54,20 @@ class Friends extends React.Component {
             
         }
 
-    updateHandler = id => {
+    deleteHandler = (e, id) => {
+        e.preventDefault();
+
+        let url = `http://localhost:5000/friends/${id}`
+
+        axios.delete(url)
+        .then(response => this.setState({
+            friends: response.data
+
+        }))
+    }    
+
+    updateHandler = (e, id) => {
+        e.preventDefault();
 
         let data = {
         name: this.state.name,
@@ -62,13 +78,17 @@ class Friends extends React.Component {
         let url = `http://localhost:5000/friends/${id}`;
             
         axios.put(url, data)
-            .then(response => {
-                this.setState({
+            .then(response => this.setState({
                 friends: response.data
-    
-                })
-            })
-        }
+
+            }))
+
+        this.setState({
+            name: "",
+            age: "",
+            email: ""
+        })
+    }
 
  
     
@@ -80,7 +100,8 @@ class Friends extends React.Component {
                     return (
                     <Friend 
                         friend = {friend}
-                        updateHandler ={this.updateHandler} />
+                        updateHandler ={this.updateHandler} 
+                        deleteHandler={this.deleteHandler}/>
                 )
                     })}
 
