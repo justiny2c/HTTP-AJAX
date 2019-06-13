@@ -12,15 +12,25 @@ class Friend extends React.Component {
         .then()
     }
 
+
     render(){
         return (
             <div>
                 <form>
                     <h1>{this.props.friend.name}</h1>
+                    <p>age: {this.props.friend.age}</p>
+                    <p>email: {this.props.friend.email}</p>
                     <button
                         key = {this.props.friend.id}
-                        onClick = {this.deleteHandler}>X
+                        onClick = {() => this.props.updateHandler(this.props.friend.id)}>
+                        Update
                     </button>
+                    <button
+                        key = {this.props.friend.id}
+                        onClick = {this.deleteHandler}>
+                        X
+                    </button>
+                    
                 </form>
             </div>
         )

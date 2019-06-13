@@ -32,11 +32,9 @@ class Friends extends React.Component {
         // e.preventDefault();
         
         let data = {
-                id: this.state.friends.length + 1,
                 name: this.state.name,
                 age: this.state.age,
-                email: this.state.email,
-                
+                email: this.state.email,               
             };
 
         let url = "http://localhost:5000/friends";
@@ -53,6 +51,25 @@ class Friends extends React.Component {
             
         }
 
+    updateHandler = id => {
+
+        let data = {
+        name: this.state.name,
+        age: this.state.age,
+        email: this.state.email,                
+        };
+
+        let url = `http://localhost:5000/friends/${id}`;
+            
+        axios.put(url, data)
+            .then(response => {
+                this.setState({
+                friends: response.data
+    
+                })
+            })
+        }
+
  
     
 
@@ -61,7 +78,9 @@ class Friends extends React.Component {
             <div>
                 {this.state.friends.map(friend => { 
                     return (
-                    <Friend friend = {friend} />
+                    <Friend 
+                        friend = {friend}
+                        updateHandler ={this.updateHandler} />
                 )
                     })}
 
@@ -85,10 +104,10 @@ class Friends extends React.Component {
                     value = {this.state.email}
                     onChange = {this.changeHandler}
                     />    
-                <button
-                    onSubmit = {this.submitHandler}>POST</button>    
+                <button>POST</button>    
                 
-            </form>    
+            </form> 
+
             </div> 
         );
     }
