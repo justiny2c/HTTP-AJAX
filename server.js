@@ -1,3 +1,5 @@
+// import axios from 'axios';
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -83,3 +85,12 @@ app.delete('/friends/:id', (req, res) => {
 app.listen(5000, () => {
   console.log('server listening on port 5000');
 });
+
+// axios     
+//     .get(`http://localhost:5000/friends`)
+//        .then(response => {
+         
+//        })
+//        .catch(err => {
+
+//        });
